@@ -6,14 +6,20 @@ object=$1
 getset=$2
 value=${5:-}
 
+if [ -z "$IN_NIX_SHELL" ]; then
+  cmd="modbus_cli"
+else
+  cmd="python ./modbus_cli_optimized.sh"
+fi
+
 . ./huawei_env.sh
 
 . ./huawei_objects.sh "$object"
 
 if [ "$getset" = "Get" ]; then
-  ret=$(python ./modbus_cli_with_sleep.sh "$HUAWEI_HOST" "$OBJECTID")
+  ret=$($cmd "$HUAWEI_HOST" "$OBJECTID")
 elif [ "$getset" = "Set" ]; then
-  python ./modbus_cli_with_sleep.sh "$HUAWEI_HOST" "$OBJECTID"="$(echo "$value" | sed "s/$/\/$MULTIPLIER/" | bc)"
+  $cmd "$HUAWEI_HOST" "$OBJECTID"="$(echo "$value" | sed "s/$/\/$MULTIPLIER/" | bc)"
   ret=1
 else
   exit 1
