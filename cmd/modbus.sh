@@ -9,7 +9,7 @@ value=${5:-}
 if [ -z "${IN_NIX_SHELL:-}" ]; then
   cmd="modbus"
 else
-  cmd="python ./modbus_cli_optimized.sh"
+  cmd="python ./modbus_cli_with_sleep.sh"
 fi
 
 . ./huawei_env.sh
