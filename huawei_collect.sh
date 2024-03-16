@@ -7,5 +7,5 @@ stamp="$(date +%s)"
 for x in TOTAL_ACTIVE_POWER\
          TOTAL_YIELD\
     ; do
-    dash ./cmd/modbus.sh "$x" Get | { read -r d; echo "[$stamp,$d]"; }
+    dash ./cmd/modbus.sh "$x" Get | { read -r d; echo "[$stamp,$d]"; } | dash ./huawei_convert.sh "$x"
 done;
