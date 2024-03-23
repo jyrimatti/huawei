@@ -1,25 +1,38 @@
 #! /usr/bin/env nix-shell
-#! nix-shell --pure -i dash -I channel:nixos-23.11-small -p nix gnused dash bc "pkgs.callPackage ./modbus_cli.nix {}"
+#! nix-shell --pure -i dash -I channel:nixos-23.11-small -p nix gnused dash bc netcat
 set -eu
 
 object=$1
 getset=$2
 value=${5:-}
 
-if [ -z "${IN_NIX_SHELL:-}" ]; then
-  cmd="modbus -S"
-else
-  cmd="python ./modbus_cli_with_sleep.sh"
-fi
-
 . ./huawei_env.sh
 
 . ./huawei_objects.sh "$object"
 
+case $OBJECTID in
+  h*)
+    fcode=3
+    ;;
+  i*)
+    fcode=4
+    ;;
+esac;
+register="${OBJECTID%%/*}"
+register="${register##*@}"
+case ${OBJECTID##*/} in
+  I)
+    type=uint32
+    ;;
+  *)
+    type=uint16
+    ;;
+esac
+
 if [ "$getset" = "Get" ]; then
-  ret=$($cmd "$HUAWEI_HOST" "$OBJECTID")
+  ret=$(dash ./modbus.sh/modbus.sh -d1 -c100 -m "$MULTIPLIER" "$HUAWEI_HOST" "$fcode" "$register" "$type")
 elif [ "$getset" = "Set" ]; then
-  $cmd "$HUAWEI_HOST" "$OBJECTID"="$(echo "$value" | sed "s/$/\/$MULTIPLIER/" | bc)"
+  dash ./modbus.sh/modbus.sh -d1 -c100 -m "$MULTIPLIER" "$HUAWEI_HOST" 6 "$register" "$type" "$value"
   ret=1
 else
   exit 1
@@ -29,5 +42,5 @@ if [ "$ret" = "Invalid" ]; then
   echo "$OBJECTID: Invalid address" >&2
   exit 1
 else
-  echo "$ret" | sed "s/$/*$MULTIPLIER/" | bc | sed 's/^\./0./' | sed 's/^-\./-0./' 
+  echo "$ret"
 fi
