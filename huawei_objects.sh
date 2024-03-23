@@ -2,7 +2,7 @@
 
 case $object in
 
-  TOTAL_YIELD)                    export OBJECTID=h@37514/I; export MULTIPLIER=1  ;; # Wh
+  TOTAL_YIELD)                    export OBJECTID=h@37514/I; export MULTIPLIER=10 ;; # Wh
   TOTAL_ACTIVE_POWER)             export OBJECTID=h@37516/I; export MULTIPLIER=1  ;; # W
   
 esac
