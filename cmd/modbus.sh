@@ -2,9 +2,9 @@
 #! nix-shell --pure -i dash -I channel:nixos-23.11-small -p nix gnused dash bc netcat xxd
 set -eu
 
-object=$1
-getset=$2
-value=${5:-}
+object="$1"
+getset="$2"
+value="${5:-}"
 
 . ./huawei_env.sh
 
@@ -32,7 +32,7 @@ esac
 if [ "$getset" = "Get" ]; then
   ret=$(dash ./modbus.sh/modbus.sh -d1 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" "$fcode" "$register" "$type")
 elif [ "$getset" = "Set" ]; then
-  dash ./modbus.sh/modbus.sh -d1 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" 6 "$register" "$type" "$value"
+  response="$(dash ./modbus.sh/modbus.sh -d1 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" 6 "$register" "$type" "$value")"
   ret=1
 else
   exit 1
