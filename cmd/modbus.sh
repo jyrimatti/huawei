@@ -30,7 +30,8 @@ case ${OBJECTID##*/} in
 esac
 
 if [ "$getset" = "Get" ]; then
-  ret=$(dash ./modbus.sh/modbus.sh -d1 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" "$fcode" "$register" "$type")
+  ret="$(dash ./modbus.sh/modbus.sh -d1 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" "$fcode" "$register" "$type" ||\
+         dash ./modbus.sh/modbus.sh -d2 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" "$fcode" "$register" "$type")"
 elif [ "$getset" = "Set" ]; then
   response="$(dash ./modbus.sh/modbus.sh -d1 -u100 -m "$MULTIPLIER" "$HUAWEI_HOST" 6 "$register" "$type" "$value")"
   ret=1
