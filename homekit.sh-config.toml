@@ -1,5 +1,5 @@
 bridge = "huawei"
-port = 12350
+port = 12311
 username = "AA:AA:AA:AA:AA:11"
 
 [[services]]
