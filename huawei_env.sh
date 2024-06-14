@@ -1,3 +1,3 @@
 #!/bin/sh
 
-export HUAWEI_HOST="$(cat .huawei-host)"
+export HUAWEI_HOST="$(cat "${CREDENTIALS_DIRECTORY:-.}/.huawei-host")"

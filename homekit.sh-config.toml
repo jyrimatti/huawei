@@ -1,3 +1,7 @@
+bridge = "huawei"
+port = 12311
+username = "AA:AA:AA:AA:AA:11"
+
 [[services]]
 type = "AccessoryInformation"
 
