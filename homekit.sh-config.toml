@@ -36,3 +36,55 @@ ConfiguredName = "Total yield"
 minValue = -99
 maxValue = 99999999
 cmd = "cd huawei; ./cmd/total_yield.sh"
+
+
+[[services]]
+type = "TemperatureSensor"
+
+[services.characteristics]
+Name = "Kuluvan tunnin energia"
+ConfiguredName = "Kuluvan tunnin energia"
+[services.characteristics.CurrentTemperature]
+minValue = -99999
+maxValue = 99999
+minStep = 0.001
+cmd = "cd huawei; ./cmd/current_hourly_yield.sh"
+
+
+[[services]]
+type = "TemperatureSensor"
+
+[services.characteristics]
+Name = "Kuluvan vartin energia"
+ConfiguredName = "Kuluvan vartin energia"
+[services.characteristics.CurrentTemperature]
+minValue = -99999
+maxValue = 99999
+minStep = 0.001
+cmd = "cd huawei; ./cmd/current_quarterly_yield.sh"
+
+
+[[services]]
+type = "TemperatureSensor"
+
+[services.characteristics]
+Name = "Edeltävän tunnin energia"
+ConfiguredName = "Edeltävän tunnin energia"
+[services.characteristics.CurrentTemperature]
+minValue = -99999
+maxValue = 99999
+minStep = 0.001
+cmd = "cd huawei; ./cmd/previous_hourly_yield.sh"
+
+
+[[services]]
+type = "TemperatureSensor"
+
+[services.characteristics]
+Name = "Edeltävän vartin energia"
+ConfiguredName = "Edeltävän vartin energia"
+[services.characteristics.CurrentTemperature]
+minValue = -99999
+maxValue = 99999
+minStep = 0.001
+cmd = "cd huawei; ./cmd/previous_quarterly_yield.sh"
