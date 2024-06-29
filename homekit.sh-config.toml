@@ -48,7 +48,7 @@ ConfiguredName = "Kuluvan tunnin energia"
 minValue = -99999
 maxValue = 99999
 minStep = 0.001
-cmd = "cd huawei; ./cmd/current_hourly_yield.sh"
+cmd = "cd huawei; ./cmd/current_hourly_yield.sh ./huawei.db"
 
 
 [[services]]
@@ -61,7 +61,7 @@ ConfiguredName = "Kuluvan vartin energia"
 minValue = -99999
 maxValue = 99999
 minStep = 0.001
-cmd = "cd huawei; ./cmd/current_quarterly_yield.sh"
+cmd = "cd huawei; ./cmd/current_quarterly_yield.sh ./huawei.db"
 
 
 [[services]]
@@ -74,7 +74,7 @@ ConfiguredName = "Edeltävän tunnin energia"
 minValue = -99999
 maxValue = 99999
 minStep = 0.001
-cmd = "cd huawei; ./cmd/previous_hourly_yield.sh"
+cmd = "cd huawei; ./cmd/previous_hourly_yield.sh ./huawei.db"
 
 
 [[services]]
@@ -87,4 +87,4 @@ ConfiguredName = "Edeltävän vartin energia"
 minValue = -99999
 maxValue = 99999
 minStep = 0.001
-cmd = "cd huawei; ./cmd/previous_quarterly_yield.sh"
+cmd = "cd huawei; ./cmd/previous_quarterly_yield.sh ./huawei.db"
